@@ -1,0 +1,6 @@
+Namespace(batch_size=16, bounding_norm=100, dataset_name='MiddlePhalanxTW', device='cuda:0', epochs=150, lr=0.01, max_acc=0.0, momentum=0.9, num_pip=0.3, num_shapelet=0.5, processes=10, sep=1, sge=1, smoothing=0.1, threads=2, weight_decay=1e-05, window_size=30.0)
+Dataset: MiddlePhalanxTW
+Extracting shapelet candidate!
+extracting time: 2.420020580291748
+Shapelet discovery for window_size = 30.0
+num candidate: 31521

@@ -21,7 +21,8 @@ class Log:
         self.is_train = True
         self.last_steps_state = {"loss": 0.0, "accuracy": 0.0, "steps": 0}
         self._reset(len_dataset)
-
+    def result(self):
+        return self.loss_train_r,self.accuracy_train_r,self.loss_test_r,self.best_accuracy
     def eval(self, len_dataset: int) -> None:
         # self.flush()
         self.is_train = False
@@ -35,20 +36,20 @@ class Log:
 
     def flush(self) -> None:
         if self.is_train:
-            loss = self.epoch_state["loss"] / self.epoch_state["steps"]
-            accuracy = self.epoch_state["accuracy"] / self.epoch_state["steps"]
-
+            loss_train = self.epoch_state["loss"] / self.epoch_state["steps"]
+            accuracy_train = self.epoch_state["accuracy"] / self.epoch_state["steps"]
+            
             print(
-                f"\r┃{self.epoch:12d}  ┃{loss:12.4f}  │{100*accuracy:10.2f} %  ┃{self.learning_rate:12.3e}  │{self._time():>12}  ┃",
+                f"\r┃{self.epoch:12d}  ┃{loss_train:12.4f}  │{100*accuracy_train:10.2f} %  ┃{self.learning_rate:12.3e}  │{self._time():>12}  ┃",
                 end="",
                 flush=True,
             )
-
+ 
         else:
-            loss = self.epoch_state["loss"] / self.epoch_state["steps"]
+            loss_test = self.epoch_state["loss"] / self.epoch_state["steps"]
             accuracy = self.epoch_state["accuracy"] / self.epoch_state["steps"]
-
-            print(f"{loss:12.4f}  │{100*accuracy:10.2f} %  ┃", flush=True)
+            self.loss_test_r = loss_test
+            print(f"{loss_test:12.4f}  │{100*accuracy:10.2f} %  ┃", flush=True)
 
             if accuracy > self.best_accuracy:
                 self.best_accuracy = accuracy
@@ -66,7 +67,8 @@ class Log:
         if self.step % self.log_each == self.log_each - 1:
             loss = self.last_steps_state["loss"] / self.last_steps_state["steps"]
             accuracy = self.last_steps_state["accuracy"] / self.last_steps_state["steps"]
-
+            self.loss_train_r = loss
+            self.accuracy_train_r = accuracy
             self.last_steps_state = {"loss": 0.0, "accuracy": 0.0, "steps": 0}
             progress = self.step / self.len_dataset
 
@@ -75,11 +77,11 @@ class Log:
                 end="",
                 flush=True,
             )
-
     def _eval_step(self, loss, accuracy) -> None:
         self.epoch_state["loss"] += loss.sum().item()
         self.epoch_state["accuracy"] += accuracy.sum().item()
         self.epoch_state["steps"] += accuracy.size(0)
+
 
     def _reset(self, len_dataset: int) -> None:
         self.start_time = time.time()

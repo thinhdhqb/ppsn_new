@@ -1,0 +1,8 @@
+Namespace(batch_size=16, bounding_norm=100, dataset_name='Adiac', device='cuda:0', epochs=150, lr=0.01, max_acc=0.0, momentum=0.9, num_pip=0.3, num_shapelet=10.0, processes=10, r=3, sep=1, sge=1, smoothing=0.1, subset_ratio=0.2, threads=2, weight_decay=1e-05, window_size=30.0)
+Dataset: Adiac
+Extracting shapelet candidate!
+extracting time: 8.684391498565674
+Shapelet discovery for window_size = 30.0
+num candidate: 68250
+Phase 1: Initial candidate evaluation on subset
+Phase 2: Re-evaluating 5328 candidates on full dataset

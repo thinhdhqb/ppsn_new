@@ -38,13 +38,14 @@ def basic_smooth_crossentropy(pred, target, smoothing=0.1):
 def main(args):
     device = torch.device(args.device)
     initialize(seed=42)
-
+    #load dataset
     print("Dataset: %s" % args.dataset_name)
     dataset_path = path.join(*['dataset','UCRArchive_2018', args.dataset_name])
 
     train_file_path = path.join(dataset_path, '{}_TRAIN.tsv'.format(args.dataset_name))
     test_file_path = path.join(dataset_path, '{}_TEST.tsv'.format(args.dataset_name))
 
+    #Univariate Dataset
     training_set_loader = UnivariateDataset(train_file_path, batch_size=args.batch_size, is_train=1)
     testing_set_loader = UnivariateDataset(test_file_path, batch_size=args.batch_size, is_train=0)
 
@@ -63,27 +64,34 @@ def main(args):
     else:
         args.batch_size = 256
 
+    #set batch size for data
     training_set_loader.update_batch_size(args.batch_size)
     testing_set_loader.update_batch_size(2048)
 
+    #shapelet start 
     shapelet_discovery = ShapeletDiscover(window_size=args.window_size, num_pip=args.num_pip, processes=args.processes)
     print("Extracting shapelet candidate!")
     shapelet_discovery.extract_candidate(train_data=training_set_loader.data)
     print("Shapelet discovery for window_size = %s" % args.window_size)
-    shapelet_discovery.discovery(train_data=training_set_loader.data, train_labels=training_set_loader.labels)
+    time_extract_shapelet,num_candidate=shapelet_discovery.discovery(train_data=training_set_loader.data, train_labels=training_set_loader.labels)
     shapelets_info = shapelet_discovery.get_shapelet_info(number_of_shapelet=args.num_shapelet)
 
     shapelets = []
     for si in shapelets_info:
         sc = training_set_loader.data[int(si[0]),int(si[1]):int(si[2])]
         shapelets.append(sc)
-
+    #end
+    
     model = LearningPShapeletsModel(shapelets_info=shapelets_info, shapelets=shapelets,
                                     len_ts=len_of_ts, num_classes=num_classes, sge=args.sge,
                                     window_size=args.window_size, bounding_norm=args.bounding_norm).to(device)
 
     optimizer = torch.optim.AdamW(model.parameters(),lr=args.lr, weight_decay=args.weight_decay)
     log = Log(log_each=3)
+    best_train_loss  =-1
+    best_train_accuracy  =-1
+    best_test_loss  =-1
+    best_test_accuracy =-1    
     for epoch in range(args.epochs+1):
         model.train()
         log.train(len_dataset=len(training_set_loader))
@@ -102,6 +110,7 @@ def main(args):
                 correct = torch.argmax(predictions.data, 1) == targets
                 log(model, loss.cpu(), correct.cpu(), args.lr)
 
+        
         if epoch % args.sep == 0:
             model.eval()
             log.eval(len_dataset=len(testing_set_loader))
@@ -116,9 +125,17 @@ def main(args):
                     correct = torch.argmax(predictions, 1) == targets
                     log(model, loss.cpu(), correct.cpu())
 
-    log.flush()
 
-
+    log.flush() 
+    best_train_loss,best_train_accuracy,best_test_loss,best_test_accuracy = log.result()
+    print(f"{best_train_loss}|{best_train_accuracy}|{best_test_loss}|{best_test_accuracy}")
+    with open(f"result_train1/{args.dataset_name}_result.txt", "w") as f:
+        f.write(f"{best_train_loss:.4f}\n")
+        f.write(f"{best_train_accuracy:.4f}\n")
+        f.write(f"{best_test_loss:.4f}\n")
+        f.write(f"{best_test_accuracy:.4f}\n")
+        f.write(f"{time_extract_shapelet:.20f}\n")
+        f.write(f"{num_candidate}\n")
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     # Optimizer parameters
