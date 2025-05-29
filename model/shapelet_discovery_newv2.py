@@ -38,7 +38,6 @@ class ShapeletDiscover():
             list_group_shapelet = pstsm.find_c_shapelet(list_ppi, number_of_shapelet)
             list_group_shapelet = np.asarray(list_group_shapelet)
             list_group_shapelet = list_group_shapelet[list_group_shapelet[:, 1].argsort()]
-            print(list_group_shapelet)
             list_shapelet = np.concatenate((list_shapelet,list_group_shapelet),axis=0)
 
         return list_shapelet
@@ -129,7 +128,6 @@ class ShapeletDiscover():
         time_start = time.time()
         self.train_data = train_data
         self.train_labels = train_labels
-        print(self.train_labels)
         self.len_of_ts = len(train_data[0])
 
         self.window_sizes = [window_size for window_size in self.default_window_sizes if window_size < self.len_of_ts]  # Default window sizes
