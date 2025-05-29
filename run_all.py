@@ -135,7 +135,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
 
                 count += 1
                 if count >= max_datasets:
-                    print("Reached maximum of 30 datasets.")
+                    print(f"Reached maximum of {max_datasets} datasets.")
                     break
         else:
             print(f"⚠️ Dataset '{dataset}' không có trong configs. Bỏ qua.")
