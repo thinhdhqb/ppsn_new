@@ -10,7 +10,7 @@ import random
 
 class ShapeletDiscover():
     def __init__(self, window_sizes = [5, 10, 20, 30, 50, 100, 200], num_pip=0.4, processes=4, subset_ratio=0.2, r=3):
-        self.window_sizes = window_sizes
+        self.default_window_sizes = window_sizes
         self.num_pip = num_pip
         self.list_group_ppi = []
         self.len_of_ts = None
@@ -131,7 +131,8 @@ class ShapeletDiscover():
         self.train_labels = train_labels
 
         self.len_of_ts = len(train_data[0])
-        print(self.len_of_ts)
+
+        self.window_sizes = [window_size for window_size in self.default_window_sizes if window_size < self.len_of_ts]  # Default window sizes
         self.list_labels = np.unique(train_labels)
 
         self.list_start_pos = {}
