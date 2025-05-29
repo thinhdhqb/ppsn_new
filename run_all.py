@@ -59,8 +59,9 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
 
                 cmd_new = (
                     f'python3 ppsn_demo_newv3.py '
+                    f'--dataset_name="{dataset}" '
                     f'--num_shapelet={str(num_shapelet)} '
-                    f'--window_size={window_size} --epochs=200 | tee {output_file_new}'
+                    f'--epochs=200 | tee {output_file_new}'
                     
                 )
 
