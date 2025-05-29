@@ -51,7 +51,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
         if dataset in configs:
             num_shapelet, window_size = configs[dataset]
             # if size < 2 and float(num_shapelet) >= 1:
-            if size < 2 :
+            if size < 1 :
                 output_file_new = f"train3/{dataset}_new.txt"
                 output_file_old = f"train3/{dataset}.txt"
                 result_file_old = f"{dataset}_result.txt"
