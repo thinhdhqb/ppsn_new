@@ -141,7 +141,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
         else:
             print(f"⚠️ Dataset '{dataset}' không có trong configs. Bỏ qua.")
 
-    with open("success_log.csv", "w", newline='') as csvfile:
+    with open("success_log_3.csv", "w", newline='') as csvfile:
         fieldnames = [
             'Dataset', 'Size_MB', 'Num_Shapelet', 'Window_Size',
             'Extract_Time_old', 'Extract_Time_new',
