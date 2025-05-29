@@ -129,7 +129,7 @@ def main(args):
     log.flush() 
     best_train_loss,best_train_accuracy,best_test_loss,best_test_accuracy = log.result()
     print(f"{best_train_loss}|{best_train_accuracy}|{best_test_loss}|{best_test_accuracy}")
-    with open(f"result_train1/{args.dataset_name}_result.txt", "w") as f:
+    with open(f"result_train3/{args.dataset_name}_result.txt", "w") as f:
         f.write(f"{best_train_loss:.4f}\n")
         f.write(f"{best_train_accuracy:.4f}\n")
         f.write(f"{best_test_loss:.4f}\n")
