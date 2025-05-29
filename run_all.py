@@ -156,4 +156,4 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
         writer.writerows(success_log)
 
 if __name__ == "__main__":
-    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=100)
+    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=5)
