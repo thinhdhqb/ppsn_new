@@ -131,6 +131,7 @@ class ShapeletDiscover():
         self.train_labels = train_labels
 
         self.len_of_ts = len(train_data[0])
+        print(self.len_of_ts)
         self.list_labels = np.unique(train_labels)
 
         self.list_start_pos = {}
