@@ -138,7 +138,7 @@ class ShapeletDiscover():
 
         for window_size in self.window_sizes:
             self.list_start_pos[window_size] = np.ones(self.len_of_ts, dtype=int)
-            self.list_end_pos[window_size] = np.ones(self.len_of_ts, dtype=int) * (self.window_size * 2 + 1)
+            self.list_end_pos[window_size] = np.ones(self.len_of_ts, dtype=int) * (window_size * 2 + 1)
             for i in range(window_size):
                 self.list_end_pos[window_size][-(i + 1)] -= window_size - i
             for i in range(window_size - 1):
