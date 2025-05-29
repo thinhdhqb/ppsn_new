@@ -61,7 +61,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                     f'python3 ppsn_demo_newv3.py '
                     f'--dataset_name="{dataset}" '
                     f'--num_shapelet={str(num_shapelet)} '
-                    f'--epochs=200 | tee {output_file_new}'
+                    f'--epochs=10 | tee {output_file_new}'
                     
                 )
 
@@ -69,7 +69,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                     f'python3 ppsn_demo.py '
                     f'--dataset_name="{dataset}" '
                     f'--num_shapelet={num_shapelet} '
-                    f'--window_size={window_size} --epochs=200 | tee {output_file_old}'
+                    f'--window_size={window_size} --epochs=10 | tee {output_file_old}'
                 )
 
                 print(f"Running NEW: {cmd_new}")
@@ -156,4 +156,4 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
         writer.writerows(success_log)
 
 if __name__ == "__main__":
-    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=5)
+    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=2)
