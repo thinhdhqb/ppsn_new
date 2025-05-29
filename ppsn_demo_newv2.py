@@ -69,10 +69,9 @@ def main(args):
     testing_set_loader.update_batch_size(2048)
 
     #shapelet start 
-    shapelet_discovery = ShapeletDiscover(window_size=args.window_size, num_pip=args.num_pip, processes=args.processes,subset_ratio=args.subset_ratio,r=args.r)
+    shapelet_discovery = ShapeletDiscover(num_pip=args.num_pip, processes=args.processes,subset_ratio=args.subset_ratio,r=args.r)
     print("Extracting shapelet candidate!")
     shapelet_discovery.extract_candidate(train_data=training_set_loader.data)
-    print("Shapelet discovery for window_size = %s" % args.window_size)
     time_extract_shapelet,num_candidate,num_candidate_after=shapelet_discovery.discovery(train_data=training_set_loader.data, train_labels=training_set_loader.labels,g=args.num_shapelet)
     shapelets_info = shapelet_discovery.get_shapelet_info(number_of_shapelet=args.num_shapelet)
 
@@ -143,7 +142,7 @@ if __name__ == '__main__':
     # General parametersƯ
     parser.add_argument("--dataset_name", default="ECGFiveDays", type=str, help="dataset name")
     parser.add_argument("--num_shapelet", default=0.2, type=float, help="number of shapelets")
-    # parser.add_argument("--window_size", default=10, type=float, help="window size")
+    parser.add_argument("--window_size", default=10, type=float, help="window size")
     parser.add_argument("--num_pip", default=0.3, type=float, help="number of pips")
     parser.add_argument("--sge", default=1, type=int, help="stop-gradient epochs")
     parser.add_argument("--processes", default=10, type=int, help="number of processes for extracting shapelets")
