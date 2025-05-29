@@ -1,0 +1,2 @@
+Dataset,Size_MB,Num_Shapelet,Window_Size,Extract_Time_old,Extract_Time_new,Final_Loss_train_old,Final_Acc_train_old,Final_Loss_test_old,Final_Acc_test_old,Final_Loss_train_new,Final_Acc_train_new,Final_Loss_test_new,Final_Acc_test_new,num_candidate_old,num_candidate_new,num_candidate_after_round1
+ArrowHead,0.56,5,10,10.4475,163.0248,0.0682,0.5938,0.0061,0.6457,0.0703,0.5938,0.0053,0.7429,9000.0,9000.0,3762.0
