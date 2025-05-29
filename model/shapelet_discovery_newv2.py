@@ -129,7 +129,7 @@ class ShapeletDiscover():
         time_start = time.time()
         self.train_data = train_data
         self.train_labels = train_labels
-
+        print(self.train_labels)
         self.len_of_ts = len(train_data[0])
 
         self.window_sizes = [window_size for window_size in self.default_window_sizes if window_size < self.len_of_ts]  # Default window sizes
