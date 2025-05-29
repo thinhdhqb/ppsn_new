@@ -52,8 +52,8 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
             num_shapelet, window_size = configs[dataset]
             # if size < 2 and float(num_shapelet) >= 1:
             if size < 2 :
-                output_file_new = f"train/{dataset}_new.txt"
-                output_file_old = f"train/{dataset}.txt"
+                output_file_new = f"train3/{dataset}_new.txt"
+                output_file_old = f"train3/{dataset}.txt"
                 result_file_old = f"{dataset}_result.txt"
                 result_file_new = f"{dataset}_result_new.txt"
 
@@ -84,7 +84,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                 time_extract_shapelet_new = num_candidate_new = num_candidate_after = -1
 
                 try:
-                    with open("result_train2/" + result_file_old, "r") as f:
+                    with open("result_train3/" + result_file_old, "r") as f:
                         lines = f.readlines()
                         if len(lines) >= 6:
                             best_train_loss = float(lines[0].strip())
@@ -97,7 +97,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                     print(f"⚠️ Không đọc được file cũ: {dataset}: {e}")
 
                 try:
-                    with open("result_train2/" + result_file_new, "r") as f:
+                    with open("result_train3/" + result_file_new, "r") as f:
                         lines = f.readlines()
                         if len(lines) >= 7:
                             best_train_loss_new = float(lines[0].strip())
