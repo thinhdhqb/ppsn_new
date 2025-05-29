@@ -214,7 +214,7 @@ class ShapeletDiscover():
 
         print(time.time()-timee)
         time_total = time.time() - time_start
-        print(f"window_size: {self.window_size} - total time: {time_total}")
+        print(f"Total time: {time_total}")
         return time_total,num_candidate,num_candidate_select
 
     def evaluate_group_wrapper_new(self,c):
