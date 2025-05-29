@@ -57,26 +57,25 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                 result_file_old = f"{dataset}_result.txt"
                 result_file_new = f"{dataset}_result_new.txt"
 
-                # cmd_new = (
-                #     f'python3.8 ppsn_demo_new.py '
-                #     f'--dataset_name="{dataset}" '
-                #     f'--num_shapelet={str(num_shapelet)} '
-                #     f'--window_size={window_size} --epochs=200 | tee {output_file_new}'
+                cmd_new = (
+                    f'python3 ppsn_demo_newv3.py '
+                    f'--num_shapelet={str(num_shapelet)} '
+                    f'--window_size={window_size} --epochs=200 | tee {output_file_new}'
                     
-                # )
+                )
 
-                # cmd_old = (
-                #     f'python3.8 ppsn_demo.py '
-                #     f'--dataset_name="{dataset}" '
-                #     f'--num_shapelet={num_shapelet} '
-                #     f'--window_size={window_size} --epochs=200 | tee {output_file_old}'
-                # )
+                cmd_old = (
+                    f'python3 ppsn_demo.py '
+                    f'--dataset_name="{dataset}" '
+                    f'--num_shapelet={num_shapelet} '
+                    f'--window_size={window_size} --epochs=200 | tee {output_file_old}'
+                )
 
-                # print(f"Running NEW: {cmd_new}")
-                # result1 = subprocess.run(cmd_new, shell=True)
+                print(f"Running NEW: {cmd_new}")
+                result1 = subprocess.run(cmd_new, shell=True)
 
-                # print(f"Running OLD: {cmd_old}")
-                # result2 = subprocess.run(cmd_old, shell=True)
+                print(f"Running OLD: {cmd_old}")
+                result2 = subprocess.run(cmd_old, shell=True)
 
                 # Khởi tạo mặc định
                 best_train_loss = best_train_accuracy = best_test_loss = best_test_accuracy = -1
@@ -85,7 +84,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                 time_extract_shapelet_new = num_candidate_new = num_candidate_after = -1
 
                 try:
-                    with open("result_train1/" + result_file_old, "r") as f:
+                    with open("result_train2/" + result_file_old, "r") as f:
                         lines = f.readlines()
                         if len(lines) >= 6:
                             best_train_loss = float(lines[0].strip())
@@ -98,7 +97,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                     print(f"⚠️ Không đọc được file cũ: {dataset}: {e}")
 
                 try:
-                    with open("result_train1/" + result_file_new, "r") as f:
+                    with open("result_train2/" + result_file_new, "r") as f:
                         lines = f.readlines()
                         if len(lines) >= 7:
                             best_train_loss_new = float(lines[0].strip())
