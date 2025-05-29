@@ -47,8 +47,9 @@ class ShapeletDiscover():
         t1 = self.group_train_data[l][i] # Current time series
         # print(l,ts_pos,i)
         pdm[i * 10000 + i] = np.zeros((0, 0))
-        for p in range(len(self.train_data)):
-            t2 = self.train_data[p]
+
+        for p in range(len(self.train_data)): # For each time series p in training data
+            t2 = self.train_data[p] 
             matrix_1, matrix_2 = auto_pisd.calculate_matrix(t1, t2, self.window_size)
             pdm[ts_pos * 10000 + p] = matrix_1
 

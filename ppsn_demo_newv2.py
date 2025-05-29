@@ -143,7 +143,7 @@ if __name__ == '__main__':
     # General parametersƯ
     parser.add_argument("--dataset_name", default="ECGFiveDays", type=str, help="dataset name")
     parser.add_argument("--num_shapelet", default=0.2, type=float, help="number of shapelets")
-    parser.add_argument("--window_size", default=10, type=float, help="window size")
+    # parser.add_argument("--window_size", default=10, type=float, help="window size")
     parser.add_argument("--num_pip", default=0.3, type=float, help="number of pips")
     parser.add_argument("--sge", default=1, type=int, help="stop-gradient epochs")
     parser.add_argument("--processes", default=10, type=int, help="number of processes for extracting shapelets")
