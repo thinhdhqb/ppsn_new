@@ -117,8 +117,8 @@ def main(args):
                     loss = basic_smooth_crossentropy(predictions, targets, smoothing=args.smoothing)
                     correct = torch.argmax(predictions, 1) == targets
                     log(model, loss.cpu(), correct.cpu())
-
-    best_train_loss ,best_train_accuracy ,best_test_loss ,best_test_accuracy = log.flush() 
+    log.flush()
+    best_train_loss ,best_train_accuracy ,best_test_loss ,best_test_accuracy = log.result() 
     print(best_train_loss ,best_train_accuracy ,best_test_loss ,best_test_accuracy)
     with open(f"result_train/{args.dataset_name}_result_new.txt", "w") as f:
         f.write(f"{best_train_loss:.4f}\n")
