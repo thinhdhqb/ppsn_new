@@ -11,7 +11,7 @@ from model.position_shapelet import LearningPShapeletsModel
 from util.log import Log
 
 import warnings
-warnings.filterwarnings("ignore", category=numpy.VisibleDeprecationWarning)
+warnings.filterwarnings("ignore", category=numpy.exceptions.VisibleDeprecationWarning)
 
 
 def initialize(seed: int):
