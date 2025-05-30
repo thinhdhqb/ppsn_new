@@ -1,2 +1,12 @@
 Dataset,Size_MB,Num_Shapelet,Window_Size,Extract_Time_old,Extract_Time_new,Final_Loss_train_old,Final_Acc_train_old,Final_Loss_test_old,Final_Acc_test_old,Final_Loss_train_new,Final_Acc_train_new,Final_Loss_test_new,Final_Acc_test_new,num_candidate_old,num_candidate_new,num_candidate_after_round1
-ArrowHead,0.56,5,10,10.4475,163.0248,0.0682,0.5938,0.0061,0.6457,0.0703,0.5938,0.0053,0.7429,9000.0,9000.0,3762.0
+
+ArrowHead,0.56,5,10,9.3733,163.9813,0.0266,1.0,0.0045,0.8057,0.0265,1.0,0.0042,0.7943,9000.0,9000.0,3762.0
+
+Beef,0.3,2,10,12.8495,262.1423,0.0366,1.0,0.0288,0.8,0.0364,1.0,0.028,0.8667,14070.0,14070.0,2820.0
+
+BeetleFly,0.22,0.5,100,33.0782,37.6317,0.0327,1.0,0.0313,0.95,0.0325,1.0,0.0321,0.85,10220.0,10220.0,768.0
+
+BirdChicken,0.22,1,100,34.0425,44.9037,0.0326,1.0,0.0461,0.9,0.0327,1.0,0.03,0.95,10220.0,10220.0,1536.0
+
+BME,0.2,0.05,10,3.3283,8.0418,0.0368,0.9667,0.0039,0.96,0.0425,0.9,0.0048,0.8267,3810.0,3810.0,18.0
+

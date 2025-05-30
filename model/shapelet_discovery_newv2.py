@@ -9,7 +9,7 @@ from functools import partial
 import random
 
 class ShapeletDiscover():
-    def __init__(self, window_sizes = [5, 10, 20, 30, 50, 100, 200], num_pip=0.4, processes=4, subset_ratio=0.2, r=3):
+    def __init__(self, window_sizes = [10, 20, 30, 50, 100, 200], num_pip=0.4, processes=4, subset_ratio=0.2, r=3):
         self.default_window_sizes = window_sizes
         self.num_pip = num_pip
         self.list_group_ppi = []

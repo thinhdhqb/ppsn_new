@@ -1,6 +1,7 @@
 import csv
 import subprocess
 import os
+import argparse
 
 # Đọc danh sách dataset đã xử lý
 def read_processed_datasets(log_file="processed_datasets.txt"):
@@ -35,7 +36,7 @@ def read_config_csv(file_path):
             configs[dataset] = (num_shapelet, window_size)
     return configs
 
-def run_filtered_commands(folder_file, config_file, max_datasets=10):
+def run_filtered_commands(folder_file, config_file, max_datasets=10, epochs=200):
     folder_sizes = read_folder_sizes(folder_file)
     configs = read_config_csv(config_file)
     success_log = []
@@ -44,9 +45,9 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
     count = 0
 
     for dataset, size in folder_sizes.items():
-        # if dataset in processed_datasets:
-        #     print(f"✅ Đã xử lý '{dataset}', bỏ qua.")
-        #     continue
+        if dataset in processed_datasets:
+            print(f"✅ Đã xử lý '{dataset}', bỏ qua.")
+            continue
 
         if dataset in configs:
             num_shapelet, window_size = configs[dataset]
@@ -61,7 +62,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                     f'python3 ppsn_demo_newv3.py '
                     f'--dataset_name="{dataset}" '
                     f'--num_shapelet={str(num_shapelet)} '
-                    f'--epochs=200 | tee {output_file_new}'
+                    f'--epochs={epochs} | tee {output_file_new}'
                     
                 )
 
@@ -69,7 +70,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
                     f'python3 ppsn_demo.py '
                     f'--dataset_name="{dataset}" '
                     f'--num_shapelet={num_shapelet} '
-                    f'--window_size={window_size} --epochs=200 | tee {output_file_old}'
+                    f'--window_size={window_size} --epochs={epochs} | tee {output_file_old}'
                 )
 
                 print(f"Running NEW: {cmd_new}")
@@ -156,4 +157,11 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10):
         writer.writerows(success_log)
 
 if __name__ == "__main__":
-    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=5)
+    parser = argparse.ArgumentParser()
+    # Optimizer parameters
+    parser.add_argument('--max_dataset', type=int, default=5, metavar='M',
+                        help='Max datasets to process (default: 5)')
+    parser.add_argument("--epochs", default=200, type=int, help="Total number of epochs.")
+    args = parser.parse_args()
+    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=args.max_datasets, epochs=args.epochs)
+    
