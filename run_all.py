@@ -159,7 +159,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10, epochs=200,
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     # Optimizer parameters
-    parser.add_argument('--max_dataset', type=int, default=5, metavar='M',
+    parser.add_argument('--max_datasets', type=int, default=5, metavar='M',
                         help='Max datasets to process (default: 5)')
     parser.add_argument("--epochs", default=200, type=int, help="Total number of epochs.")
     parser.add_argument("--max_size", default=2, type=int, help="Maximum size of dataset in MB to process.")
