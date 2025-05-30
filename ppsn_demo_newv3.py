@@ -7,7 +7,7 @@ import random
 import torch.nn.functional as F
 from util.ucr_data_loader import UnivariateDataset
 from model.shapelet_discovery_newv2 import ShapeletDiscover
-from model.position_shapelet import LearningPShapeletsModel
+from model.position_shapelet_v2 import LearningPShapeletsModel
 from util.log import Log
 
 import warnings
