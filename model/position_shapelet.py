@@ -173,10 +173,10 @@ class PISDistBlock(nn.Module):
 
 
 class PShapeletLayer(nn.Module):
-    def __init__(self, shapelets_info, shapelets , len_ts, window_size=20, bounding_norm=100):
+    def __init__(self, shapelets_info, shapelets , len_ts, bounding_norm=100):
         super(PShapeletLayer, self).__init__()
         self.blocks = nn.ModuleList([
-            PISDistBlock(shapelet=shapelets[i],shapelet_info=shapelets_info[i],len_ts=len_ts,window_size=window_size,
+            PISDistBlock(shapelet=shapelets[i],shapelet_info=shapelets_info[i],len_ts=len_ts,window_size=shapelets_info[i][5],
                          bounding_norm=bounding_norm)
             for i in range(len(shapelets))])
 
@@ -192,11 +192,11 @@ class PShapeletLayer(nn.Module):
 
 
 class LearningPShapeletsModel(nn.Module):
-    def __init__(self, shapelets_info, shapelets , len_ts, num_classes, sge=0, window_size=20, bounding_norm=100):
+    def __init__(self, shapelets_info, shapelets , len_ts, num_classes, sge=0, bounding_norm=100):
         super(LearningPShapeletsModel, self).__init__()
         self.sge = sge
         self.pshapelet_layer = PShapeletLayer(shapelets_info=shapelets_info, shapelets=shapelets,len_ts=len_ts,
-                                              window_size=window_size,bounding_norm=bounding_norm)
+                                              bounding_norm=bounding_norm)
         self.num_shapelets = len(shapelets)
         self.linear3 = nn.Linear(self.num_shapelets, num_classes)
 

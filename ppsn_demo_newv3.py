@@ -82,7 +82,7 @@ def main(args):
     #end
     model = LearningPShapeletsModel(shapelets_info=shapelets_info, shapelets=shapelets,
                                     len_ts=len_of_ts, num_classes=num_classes, sge=args.sge,
-                                    window_size=args.window_size, bounding_norm=args.bounding_norm).to(device)
+                                    bounding_norm=args.bounding_norm).to(device)
 
     optimizer = torch.optim.AdamW(model.parameters(),lr=args.lr, weight_decay=args.weight_decay)
     log = Log(log_each=3)
