@@ -36,7 +36,7 @@ def read_config_csv(file_path):
             configs[dataset] = (num_shapelet, window_size)
     return configs
 
-def run_filtered_commands(folder_file, config_file, max_datasets=10, epochs=200):
+def run_filtered_commands(folder_file, config_file, max_datasets=10, epochs=200, max_size=2):
     folder_sizes = read_folder_sizes(folder_file)
     configs = read_config_csv(config_file)
     success_log = []
@@ -52,7 +52,7 @@ def run_filtered_commands(folder_file, config_file, max_datasets=10, epochs=200)
         if dataset in configs:
             num_shapelet, window_size = configs[dataset]
             # if size < 2 and float(num_shapelet) >= 1:
-            if size < 1 :
+            if size < max_size:
                 output_file_new = f"train3/{dataset}_new.txt"
                 output_file_old = f"train3/{dataset}.txt"
                 result_file_old = f"{dataset}_result.txt"
@@ -162,6 +162,7 @@ if __name__ == "__main__":
     parser.add_argument('--max_dataset', type=int, default=5, metavar='M',
                         help='Max datasets to process (default: 5)')
     parser.add_argument("--epochs", default=200, type=int, help="Total number of epochs.")
+    parser.add_argument("--max_size", default=2, type=int, help="Maximum size of dataset in MB to process.")
     args = parser.parse_args()
-    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=args.max_datasets, epochs=args.epochs)
+    run_filtered_commands("folder_sizes.txt", "results/ppsn_vs_sota.csv", max_datasets=args.max_datasets, epochs=args.epochs, max_size=args.max_size)
     
