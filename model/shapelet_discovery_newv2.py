@@ -105,6 +105,7 @@ class ShapeletDiscover():
             idx_c_on_ts = i
             ppi = np.asarray([ts_pos, ts_pis[0], ts_pis[1], best_ig, self.list_labels[l],ts_ci_pis,idx_c_on_ts, best_window_size])
             list_result.append(ppi)
+            break
         return list_result
    
     def extract_candidate(self, train_data):
