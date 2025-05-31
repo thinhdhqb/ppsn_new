@@ -84,7 +84,7 @@ class ShapeletDiscover():
                         pcs_ci_list = ts_2_ci[ts_pcs[0]:ts_pcs[1] - 1]
                         dist = auto_pisd.find_min_dist(ts_pis, ts_pcs, matrix, self.list_start_pos[window_size],
                                                     self.list_end_pos[window_size], ts_ci_pis, pcs_ci_list)
-
+                        print("Distance for time series %s with shapelet %s: %s" % (p, ts_pis, dist))
                         list_dist[p] = dist
                 # Calculate information gain for current window size
                 if subset_indices is not None:
