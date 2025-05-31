@@ -194,6 +194,8 @@ def calculate_matrix(ts_1, ts_2, w):
 
 def calculate_subdist(matrix, pis, list_start_pos, list_end_pos):
     sub_matrix = matrix[pis[0]:pis[1], list_start_pos[pis[0]]:list_end_pos[pis[1]-1]]
+    print("sub_matrix: ")
+    print(sub_matrix)
     list_dist = np.sqrt(np.sum(sub_matrix, axis=0))
     return list_dist
 
