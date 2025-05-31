@@ -82,8 +82,12 @@ class ShapeletDiscover():
                         ts_pcs = auto_pisd.pcs_extractor(ts_pis, window_size, self.len_of_ts)
                         ts_2_ci = self.train_data_ci[p]
                         pcs_ci_list = ts_2_ci[ts_pcs[0]:ts_pcs[1] - 1]
+                        print(f"Matrix: {matrix}")
+                        print(self.list_start_pos[window_size])
+                        print(self.list_end_pos[window_size])
                         dist = auto_pisd.find_min_dist(ts_pis, ts_pcs, matrix, self.list_start_pos[window_size],
                                                     self.list_end_pos[window_size], ts_ci_pis, pcs_ci_list)
+
                         list_dist[p] = dist
                 # Calculate information gain for current window size
                 if subset_indices is not None:
