@@ -73,7 +73,8 @@ class ShapeletDiscover():
             # Calculate subdist with time series in evaluation set for each window size
             for window_size in self.window_sizes:
                 list_dist = [0] * len(self.train_data)  # Initialize with zeros for all time series
-
+                print("List start pos for window size %s: %s" % (window_size, self.list_start_pos[window_size]))
+                print("List end pos for window size %s: %s" % (window_size, self.list_end_pos[window_size]))
                 for p in eval_indices:
                     if p == ts_pos:
                         list_dist[p] = 0
@@ -93,14 +94,14 @@ class ShapeletDiscover():
                     current_ig = ssm.find_best_split_point_and_info_gain(subset_dist, subset_labels, self.list_labels[l])
                 else:
                     current_ig = ssm.find_best_split_point_and_info_gain(list_dist, self.train_labels, self.list_labels[l])
-                print("Current IG: %s for window size %s" % (current_ig, window_size))
+                # print("Current IG: %s for window size %s" % (current_ig, window_size))
                 # Update best if current is better
                 if current_ig > best_ig:
-                    print("Found better IG: %s for window size %s" % (current_ig, window_size))
+                    # print("Found better IG: %s for window size %s" % (current_ig, window_size))
                     best_ig = current_ig
-                    print("Best IG: %s" % best_ig)
+                    # print("Best IG: %s" % best_ig)
                     best_window_size = window_size
-                    print("Best window size: %s" % best_window_size)
+                    # print("Best window size: %s" % best_window_size)
 
             idx_c_on_ts = i
             ppi = np.asarray([ts_pos, ts_pis[0], ts_pis[1], best_ig, self.list_labels[l],ts_ci_pis,idx_c_on_ts, best_window_size])
