@@ -87,6 +87,9 @@ class ShapeletDiscover():
                                                     self.list_end_pos[window_size], ts_ci_pis, pcs_ci_list)
                         print("Distance for time series %s with shapelet %s: %s" % (p, ts_pis, dist))
                         list_dist[p] = dist
+                        break
+                
+                    
                 # Calculate information gain for current window size
                 if subset_indices is not None:
                     subset_dist = [list_dist[idx] for idx in subset_indices]
