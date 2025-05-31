@@ -93,7 +93,7 @@ class ShapeletDiscover():
                     current_ig = ssm.find_best_split_point_and_info_gain(subset_dist, subset_labels, self.list_labels[l])
                 else:
                     current_ig = ssm.find_best_split_point_and_info_gain(list_dist, self.train_labels, self.list_labels[l])
-
+                print("Current IG: %s for window size %s" % (current_ig, window_size))
                 # Update best if current is better
                 if current_ig > best_ig:
                     print("Found better IG: %s for window size %s" % (current_ig, window_size))
