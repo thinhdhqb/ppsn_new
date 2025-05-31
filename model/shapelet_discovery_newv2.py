@@ -98,6 +98,7 @@ class ShapeletDiscover():
                 if current_ig > best_ig:
                     print("Found better IG: %s for window size %s" % (current_ig, window_size))
                     best_ig = current_ig
+                    print("Best IG: %s" % best_ig)
                     best_window_size = window_size
 
             idx_c_on_ts = i
