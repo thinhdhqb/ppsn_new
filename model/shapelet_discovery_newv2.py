@@ -73,8 +73,8 @@ class ShapeletDiscover():
             # Calculate subdist with time series in evaluation set for each window size
             for window_size in self.window_sizes:
                 list_dist = [0] * len(self.train_data)  # Initialize with zeros for all time series
-                print("List start pos for window size %s: %s" % (window_size, self.list_start_pos[window_size]))
-                print("List end pos for window size %s: %s" % (window_size, self.list_end_pos[window_size]))
+                # print("List start pos for window size %s: %s" % (window_size, self.list_start_pos[window_size]))
+                # print("List end pos for window size %s: %s" % (window_size, self.list_end_pos[window_size]))
                 for p in eval_indices:
                     if p == ts_pos:
                         list_dist[p] = 0
