@@ -100,6 +100,7 @@ class ShapeletDiscover():
                     best_ig = current_ig
                     print("Best IG: %s" % best_ig)
                     best_window_size = window_size
+                    print("Best window size: %s" % best_window_size)
 
             idx_c_on_ts = i
             ppi = np.asarray([ts_pos, ts_pis[0], ts_pis[1], best_ig, self.list_labels[l],ts_ci_pis,idx_c_on_ts, best_window_size])
